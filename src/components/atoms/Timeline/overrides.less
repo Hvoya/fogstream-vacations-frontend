@@ -1,6 +1,32 @@
 @import "../../../assets/styles/variables";
 
-.rct-header-root {
-  background: @custom-primary-color!important;
+.react-calendar-timeline * {
+  border-color: #c4d2d3!important;
 }
 
+.rct-header-root {
+  background: @custom-primary-color--light!important;
+}
+
+.react-calendar-timeline .rct-horizontal-lines .rct-hl-odd {
+  background: @custom-primary-color--light!important;
+}
+
+.react-calendar-timeline .rct-sidebar .rct-sidebar-row.rct-sidebar-row-odd {
+  background-color: @custom-primary-color--light!important;
+}
+
+.rct-dateHeader:not(.rct-dateHeader-primary) {
+  text-transform: capitalize;
+  background-color: @custom-primary-color!important;
+  color: @custom-secondary-color;
+}
+
+.rct-dateHeader-primary {
+  color: @custom-tertiary-color!important;
+  text-transform: capitalize;
+}
+
+.rct-sidebar-row {
+  font-weight: 600;
+}
