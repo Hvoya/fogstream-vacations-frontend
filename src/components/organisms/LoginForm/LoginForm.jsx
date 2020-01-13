@@ -7,7 +7,7 @@ import Button from 'atoms/Button/Button';
 import InputField from 'atoms/InputField/InputField';
 import messages from '@/enums/messages';
 import classes from './LoginForm.module.less';
-import { login as createLoginAction } from '@/store/actions';
+import { createLoginRequestAction } from '@/store/actions';
 
 class LoginForm extends React.PureComponent {
   constructor(props) {
@@ -18,9 +18,15 @@ class LoginForm extends React.PureComponent {
   //  Handlers
   onSubmit(e) {
     e.preventDefault();
-    const { login, history } = this.props;
-    login();
-    history.push('/');
+    const {
+      login,
+      form: { validateFields },
+    } = this.props;
+    validateFields((err, values) => {
+      if (!err) {
+        login(values.login, values.password);
+      }
+    });
   }
 
   render() {
@@ -32,7 +38,7 @@ class LoginForm extends React.PureComponent {
       <Card>
         <Form onSubmit={this.onSubmit}>
           <Form.Item>
-            {getFieldDecorator('username', {
+            {getFieldDecorator('login', {
               rules: [
                 {
                   required: true,
@@ -72,7 +78,7 @@ class LoginForm extends React.PureComponent {
 }
 
 const mdtp = dispatch => ({
-  login: () => dispatch(createLoginAction('')),
+  login: (login, password) => dispatch(createLoginRequestAction(login, password)),
 });
 
 export default Form.create({ name: 'login_form' })(connect(null, mdtp)(withRouter(LoginForm)));

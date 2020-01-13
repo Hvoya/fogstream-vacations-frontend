@@ -1,13 +1,13 @@
 export default [
   {
     to: '/',
-    label: 'Диаграмма Гранта',
+    label: 'Общий график',
     icon: 'bar-chart',
   },
   {
-    to: '/high-load',
-    label: 'Загруженные периоды',
-    icon: 'dashboard',
+    to: '/employees',
+    label: 'Сотрудники',
+    icon: 'team',
   },
   {
     to: '/carryovers',

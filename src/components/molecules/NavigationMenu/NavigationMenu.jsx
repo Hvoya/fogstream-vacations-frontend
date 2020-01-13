@@ -1,9 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
-
-import classes from './NavigationMenu.module.less';
 import { Menu, Icon } from 'antd';
-import navigation_items from '@/enums/navigation_items';
 import { useHistory } from 'react-router';
+
+import navigation_items from '@/enums/navigation_items';
 
 const NavigationMenu = () => {
   const history = useHistory();

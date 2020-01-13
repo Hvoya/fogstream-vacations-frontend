@@ -1,13 +1,13 @@
 import React from 'react';
 
 import PasswordRecoveryForm from 'organisms/PasswordRecoveryForm/PasswordRecoveryForm';
-import classes from './SettingsPage.module.less';
+import WorkplacePageTemplate from 'templates/WorkplacePageTemplate/WorkplacePageTemplate';
 
 const SettingsPage = () => {
   return (
-    <>
+    <WorkplacePageTemplate title="Настройки">
       <PasswordRecoveryForm />
-    </>
+    </WorkplacePageTemplate>
   );
 };
 

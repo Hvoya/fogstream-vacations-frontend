@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import WorkplaceLayout from 'templates/WorkplaceLayout/WorkplaceLayout';
 import LoginLayout from 'templates/LoginLayout/LoginLayout';
 import { getAccessToken } from '@/utils/LS';
-import { login } from '@/store/actions';
+import { loginActionCreator } from '@/store/actions';
 
 const Guard = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const Guard = () => {
 
   useEffect(() => {
     const access_token = getAccessToken();
-    if (access_token) dispatch(login());
+    if (access_token) dispatch(loginActionCreator());
   }, []);
 
   return isLoggedIn ? <WorkplaceLayout /> : <LoginLayout />;
