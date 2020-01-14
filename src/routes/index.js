@@ -2,7 +2,7 @@ import LoginPage from 'pages/LoginPage/LoginPage';
 import DashboardPage from 'pages/DashboardPage/DashboardPage';
 import SettingsPage from 'pages/SettingsPage/SettingsPage';
 import EmployeesPage from 'pages/EmployeesPage/EmployeesPage';
-import SingleEmployeePage from 'pages/SingleEmployeePage/SingleEmployeePage';
+import SingleEmployeePage from 'pages/EmployeePage/EmployeePage';
 
 export const loginRoutes = [
   {
