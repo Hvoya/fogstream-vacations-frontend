@@ -1,8 +1,8 @@
 import actionTypes from '@/store/actions/actionTypes';
 
-export const createLoginRequestAction = (login, password) => ({
+export const createLoginRequestAction = (username, password) => ({
   type: actionTypes.LOGIN_REQUEST,
-  payload: { login, password },
+  payload: { username, password },
 });
 export const createLoginSuccessAction = access_token => ({
   type: actionTypes.LOGIN_SUCCESS,

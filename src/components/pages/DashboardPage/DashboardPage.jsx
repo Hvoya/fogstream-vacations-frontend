@@ -1,50 +1,28 @@
-import React from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Timeline from 'atoms/Timeline/Timeline';
 import WorkplacePageTemplate from 'templates/WorkplacePageTemplate/WorkplacePageTemplate';
-import moment from 'moment';
-
-const groups = [
-  { id: 1, title: 'Кирин Д.М.' },
-  { id: 2, title: 'group 2' },
-  { id: 3, title: 'group 1' },
-  { id: 4, title: 'group 2' },
-  { id: 5, title: 'group 1' },
-  { id: 6, title: 'group 2' },
-  { id: 7, title: 'group 1' },
-  { id: 8, title: 'group 2' },
-  { id: 9, title: 'group 1' },
-  { id: 10, title: 'group 2' },
-];
-
-const items = [
-  {
-    id: 1,
-    group: 1,
-    title: 'item 1',
-    start_time: moment(),
-    end_time: moment().add(1, 'hour'),
-  },
-  {
-    id: 2,
-    group: 2,
-    title: 'item 2',
-    start_time: moment().add(-0.5, 'hour'),
-    end_time: moment().add(0.5, 'hour'),
-  },
-  {
-    id: 3,
-    group: 1,
-    title: 'item 3',
-    start_time: moment('2019-12-15'),
-    end_time: moment('2020-01-20'),
-  },
-];
+import { createGetFullVacationsListRequestAction } from '@/store/actions/vacationsActionCreators';
+import { colorColumns, getBusyDays, getGroupsAndItems } from '@/utils/helpers';
 
 const DashboardPage = () => {
+  const dispatch = useDispatch();
+
+  const loading = useSelector(state => state.vacations.loading);
+  const vacations = useSelector(state => state.vacations.vacations);
+
+  const [groups, items] = useMemo(() => getGroupsAndItems(vacations), [vacations]);
+  const busyDays = useMemo(() => getBusyDays(vacations), [vacations]);
+  const handleColumnCheck = useCallback(time_start => colorColumns(busyDays, time_start), [busyDays]);
+
+  useEffect(() => {
+    dispatch(createGetFullVacationsListRequestAction());
+  }, []);
+
   return (
     <WorkplacePageTemplate title="Общий график">
-      <Timeline groups={groups} items={items} />
+      {!loading && <Timeline onColumnCheck={handleColumnCheck} groups={groups} items={items} />}
     </WorkplacePageTemplate>
   );
 };

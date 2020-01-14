@@ -5,7 +5,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Content from 'organisms/Content/Content';
 import Header from 'organisms/Header/Header';
 import Sider from 'organisms/Sider/Sider';
-import classes from './WorkplaceLayout.module.less';
 import { workplaceRoutes } from '@/routes';
 
 const WorkplaceLayout = () => {
@@ -23,7 +22,7 @@ const WorkplaceLayout = () => {
         <Content>
           <Switch>
             {routes}
-            {/*<Redirect to="/" />*/}
+            <Redirect to="/" />
           </Switch>
         </Content>
       </Layout>

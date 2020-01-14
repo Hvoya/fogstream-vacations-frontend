@@ -4,6 +4,7 @@ import 'react-calendar-timeline/lib/Timeline.css';
 import moment from 'moment';
 
 import './overrides.less';
+import './Timeline.less';
 
 const timeSteps = {
   year: 1,
@@ -12,21 +13,19 @@ const timeSteps = {
   hours: 0,
 };
 
-const Timeline = ({ groups, items }) => (
-  <ReactCalendarTimeline
-    maxZoom={24 * 60 * 60 * 1000}
-    timeSteps={timeSteps}
-    groups={groups}
-    items={items}
-    defaultTimeStart={moment('2020-01-01')}
-    defaultTimeEnd={moment('2020-12-31')}
-    lineHeight={45}
-    sidebarWidth={250}
-    verticalLineClassNamesForTime={timeStart => {
-      if (moment('2020-01-01').isSame(timeStart, 'day')) return ['red'];
-      return [];
-    }}
-  />
-);
+const Timeline = ({ groups, items, onColumnCheck }) => {
+  return (
+    <ReactCalendarTimeline
+      timeSteps={timeSteps}
+      groups={groups}
+      items={items}
+      defaultTimeStart={moment('2020-01-01')}
+      defaultTimeEnd={moment('2020-12-31')}
+      lineHeight={45}
+      sidebarWidth={250}
+      verticalLineClassNamesForTime={onColumnCheck}
+    />
+  );
+};
 
 export default Timeline;

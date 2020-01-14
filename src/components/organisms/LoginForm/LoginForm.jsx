@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Card, Form, Icon } from 'antd';
 import { withRouter } from 'react-router';
 
@@ -7,7 +6,6 @@ import Button from 'atoms/Button/Button';
 import InputField from 'atoms/InputField/InputField';
 import messages from '@/enums/messages';
 import classes from './LoginForm.module.less';
-import { createLoginRequestAction } from '@/store/actions';
 
 class LoginForm extends React.PureComponent {
   constructor(props) {
@@ -19,12 +17,12 @@ class LoginForm extends React.PureComponent {
   onSubmit(e) {
     e.preventDefault();
     const {
-      login,
+      onLogin,
       form: { validateFields },
     } = this.props;
     validateFields((err, values) => {
       if (!err) {
-        login(values.login, values.password);
+        onLogin(values.username, values.password);
       }
     });
   }
@@ -38,7 +36,7 @@ class LoginForm extends React.PureComponent {
       <Card>
         <Form onSubmit={this.onSubmit}>
           <Form.Item>
-            {getFieldDecorator('login', {
+            {getFieldDecorator('username', {
               rules: [
                 {
                   required: true,
@@ -77,8 +75,4 @@ class LoginForm extends React.PureComponent {
   }
 }
 
-const mdtp = dispatch => ({
-  login: (login, password) => dispatch(createLoginRequestAction(login, password)),
-});
-
-export default Form.create({ name: 'login_form' })(connect(null, mdtp)(withRouter(LoginForm)));
+export default Form.create({ name: 'login_form' })(withRouter(LoginForm));
