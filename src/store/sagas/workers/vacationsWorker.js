@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 
 import api_urls from '@/enums/api_urls';
-import { axs } from '@/utils/axs';
+import axs from '@/utils/axs';
 import {
   createGetFullVacationsListFailureAction,
   createGetFullVacationsListSuccessAction,

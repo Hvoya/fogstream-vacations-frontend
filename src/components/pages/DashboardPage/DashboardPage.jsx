@@ -21,8 +21,8 @@ const DashboardPage = () => {
   }, []);
 
   return (
-    <WorkplacePageTemplate title="Общий график">
-      {!loading && <Timeline onColumnCheck={handleColumnCheck} groups={groups} items={items} />}
+    <WorkplacePageTemplate loading={loading} title="Общий график">
+      <Timeline onColumnCheck={handleColumnCheck} groups={groups} items={items} />
     </WorkplacePageTemplate>
   );
 };

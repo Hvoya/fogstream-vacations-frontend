@@ -2,7 +2,9 @@ import actionTypes from '@/store/actions/actionTypes';
 
 const initialState = {
   employees: [],
-  employee: {},
+  employee: {
+    position: {},
+  },
   employeesLoading: false,
   employeeLoading: false,
 };

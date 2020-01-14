@@ -4,14 +4,14 @@ import { Layout } from 'antd';
 
 import Button from 'atoms/Button/Button';
 import classes from './Header.module.less';
-import { logoutActionCreator } from '@/store/actions';
+import { createLogoutAction } from '@/store/actions';
 
 const { Header: AntHeader } = Layout;
 
 const Header = () => {
   const dispatch = useDispatch();
 
-  const handleLogout = useCallback(() => dispatch(logoutActionCreator()), []);
+  const handleLogout = useCallback(() => dispatch(createLogoutAction()), []);
 
   return (
     <AntHeader className={classes.root}>

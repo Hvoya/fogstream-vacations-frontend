@@ -9,11 +9,21 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const targetDir = path.resolve(__dirname, 'dist');
 
 module.exports = {
+  entry: {
+    app: './src/index.js',
+  },
   output: {
     filename: 'main.js',
     path: targetDir,
+    publicPath: '/',
   },
   devtool: 'source-map',
+  devServer: {
+    historyApiFallback: true,
+    host: '0.0.0.0',
+    port: 8080,
+    disableHostCheck: true,
+  },
   module: {
     rules: [
       {

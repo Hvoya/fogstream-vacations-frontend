@@ -10,4 +10,13 @@ export const createLoginSuccessAction = access_token => ({
 });
 export const createLoginFailureAction = () => ({ type: actionTypes.LOGIN_FAILURE });
 
-export const logoutActionCreator = () => ({ type: actionTypes.LOGOUT });
+export const createLogoutAction = () => ({ type: actionTypes.LOGOUT });
+
+export const createChangePasswordRequestAction = (new_password, new_password_confirm, setLoading) => ({
+  type: actionTypes.CHANGE_PASSWORD_REQUEST,
+  setLoading,
+  payload: {
+    new_password,
+    new_password_confirm,
+  },
+});

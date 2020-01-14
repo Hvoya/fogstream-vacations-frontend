@@ -1,19 +1,11 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import WorkplaceLayout from 'templates/WorkplaceLayout/WorkplaceLayout';
 import LoginLayout from 'templates/LoginLayout/LoginLayout';
-import { getAccessToken } from '@/utils/LS';
-import { loginActionCreator } from '@/store/actions';
 
 const Guard = () => {
-  const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-
-  useEffect(() => {
-    const access_token = getAccessToken();
-    if (access_token) dispatch(loginActionCreator());
-  }, []);
 
   return isLoggedIn ? <WorkplaceLayout /> : <LoginLayout />;
 };

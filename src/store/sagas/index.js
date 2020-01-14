@@ -1,9 +1,9 @@
 import { all } from 'redux-saga/effects';
 
-import loginWatcher from '@/store/sagas/watchers/loginWatcher';
+import authWatcher from '@/store/sagas/watchers/authWatcher';
 import vacationsWatcher from '@/store/sagas/watchers/vacationsWatcher';
 import employeesWatcher from '@/store/sagas/watchers/employeesWatcher';
 
 export default function* rootSaga() {
-  yield all([loginWatcher(), vacationsWatcher(), employeesWatcher()]);
+  yield all([authWatcher(), vacationsWatcher(), employeesWatcher()]);
 }

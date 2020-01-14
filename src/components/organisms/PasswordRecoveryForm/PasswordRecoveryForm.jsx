@@ -11,6 +11,30 @@ import messages from '@/enums/messages';
 class PasswordRecoveryForm extends React.Component {
   constructor(props) {
     super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.comparePasswords = this.comparePasswords.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const {
+      form: { validateFields },
+      onPasswordChange,
+    } = this.props;
+    validateFields((err, values) => {
+      if (!err) {
+        onPasswordChange(values.new_password, values.new_password_confirm);
+      }
+    });
+  }
+
+  comparePasswords(rule, value, callback) {
+    const { form } = this.props;
+    if (value && value !== form.getFieldValue('new_password')) {
+      callback(messages.passwords_dont_match);
+    } else {
+      callback();
+    }
   }
 
   render() {
@@ -18,14 +42,18 @@ class PasswordRecoveryForm extends React.Component {
       form: { getFieldDecorator },
     } = this.props;
     return (
-      <Form className={classes.form}>
+      <Form onSubmit={this.handleSubmit} className={classes.form}>
         <h2>Смена пароля</h2>
         <Form.Item className={classes.formItem}>
-          {getFieldDecorator('username', {
+          {getFieldDecorator('new_password', {
             rules: [
               {
                 required: true,
                 message: messages.required_field,
+              },
+              {
+                min: 8,
+                message: messages.too_short_password,
               },
             ],
           })(
@@ -37,11 +65,14 @@ class PasswordRecoveryForm extends React.Component {
           )}
         </Form.Item>
         <Form.Item className={classes.formItem}>
-          {getFieldDecorator('password', {
+          {getFieldDecorator('new_password_confirm', {
             rules: [
               {
                 required: true,
                 message: messages.required_field,
+              },
+              {
+                validator: this.comparePasswords,
               },
             ],
           })(

@@ -4,6 +4,8 @@ export function toggleDocumentScrollbar(hide) {
   document.body.style.overflow = hide ? 'hidden' : 'auto';
 }
 
+export const getAuthHeaderString = access_token => `Token ${access_token}`;
+
 export function getShortUserName({ first_name = '', last_name = '', middle_name }) {
   let result = `${last_name} ${first_name.substr(0, 1)}.`;
   if (middle_name) result += ` ${middle_name.substr(0, 1)}.`;

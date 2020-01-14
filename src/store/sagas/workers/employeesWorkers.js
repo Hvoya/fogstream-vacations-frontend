@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 
-import { axs } from '@/utils/axs';
+import axs from '@/utils/axs';
 import api_urls from '@/enums/api_urls';
 import { handleRequestError } from '@/utils/messages';
 import {

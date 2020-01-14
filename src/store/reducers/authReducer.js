@@ -1,5 +1,5 @@
 import actionTypes from '@/store/actions/actionTypes';
-import { getAccessToken, removeAccessToken } from '@/utils/LS';
+import { getAccessToken } from '@/utils/LS';
 
 const access_token = getAccessToken();
 
@@ -16,10 +16,9 @@ export function authReducer(state = initialState, action) {
     case actionTypes.LOGIN_SUCCESS:
       return { ...state, isLoggedIn: true, access_token: action.payload.access_token, loading: false };
     case actionTypes.LOGIN_FAILURE:
-      return initialState;
+      return { loading: false, isLoggedIn: false, access_token: '' };
     case actionTypes.LOGOUT:
-      removeAccessToken();
-      return initialState;
+      return { loading: false, isLoggedIn: false, access_token: '' };
     default:
       return state;
   }
