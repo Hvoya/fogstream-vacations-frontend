@@ -10,9 +10,17 @@ import {
   createGetEmployeeSuccessAction,
 } from '@/store/actions/employeesActionCreators';
 
-export function* employeesWorker() {
+export function* employeesWorker(action) {
   try {
-    const { data: employees } = yield call(axs.get, api_urls.employees);
+    const {
+      payload: { selected_department_id, selected_position_id },
+    } = action;
+    const { data: employees } = yield call(axs.get, api_urls.employees, {
+      params: {
+        department: selected_department_id,
+        position: selected_position_id,
+      },
+    });
     yield put(createGetEmployeesListSuccessAction(employees));
   } catch (e) {
     handleRequestError(e);

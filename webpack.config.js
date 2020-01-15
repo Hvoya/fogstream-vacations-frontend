@@ -5,6 +5,7 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const targetDir = path.resolve(__dirname, 'dist');
 
@@ -185,6 +186,7 @@ module.exports = {
       template: 'src/index.html',
       filename: './index.html',
     }),
+    new BundleAnalyzerPlugin(),
   ],
   optimization: {
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],

@@ -1,4 +1,4 @@
-export const baseUrl = 'http://192.168.0.129:8000/api';
+export const baseUrl = 'https://vacation-visualizer.herokuapp.com/api';
 
 export default {
   login: '/auth/login/',
@@ -9,4 +9,7 @@ export default {
 
   employees: '/employee/',
   employee: id => `/employee/${id}/`,
+
+  positions: '/position/',
+  departments: '/department/',
 };
