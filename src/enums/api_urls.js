@@ -1,5 +1,5 @@
 export const baseUrl =
-  process.env.NODE_ENV === 'development' ? 'https://vacation-visualizer.herokuapp.com/api': `${window.origin}/api`;
+  process.env.NODE_ENV === 'https://vacation-visualizer.herokuapp.com/api';
 
 export default {
   login: '/auth/login/',
