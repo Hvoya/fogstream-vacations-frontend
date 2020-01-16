@@ -5,6 +5,7 @@ import Timeline from 'atoms/Timeline/Timeline';
 import WorkplacePageTemplate from 'templates/WorkplacePageTemplate/WorkplacePageTemplate';
 import { createGetFullVacationsListRequestAction } from '@/store/actions/vacationsActionCreators';
 import { colorColumns, getBusyDays, getGroupsAndItems } from '@/utils/helpers';
+import CommonTimelineFilters from 'molecules/CommonTimelineFilters/CommonTimelineFilters';
 
 const DashboardPage = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const DashboardPage = () => {
 
   return (
     <WorkplacePageTemplate loading={loading} title="Общий график">
+      <CommonTimelineFilters />
       {/* Change data props cause bugs  */}
       {!loading && <Timeline onColumnCheck={handleColumnCheck} groups={groups} items={items} />}
     </WorkplacePageTemplate>

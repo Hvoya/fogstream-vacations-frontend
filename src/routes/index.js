@@ -3,10 +3,11 @@ import DashboardPage from 'pages/DashboardPage/DashboardPage';
 import SettingsPage from 'pages/SettingsPage/SettingsPage';
 import EmployeesPage from 'pages/EmployeesPage/EmployeesPage';
 import SingleEmployeePage from 'pages/EmployeePage/EmployeePage';
+import route_paths from '@/enums/route_paths';
 
 export const loginRoutes = [
   {
-    path: '/login',
+    path: route_paths.login,
     exact: true,
     component: LoginPage,
   },
@@ -14,22 +15,22 @@ export const loginRoutes = [
 
 export const workplaceRoutes = [
   {
-    path: '/',
+    path: route_paths.root,
     exact: true,
     component: DashboardPage,
   },
   {
-    path: '/employees',
+    path: route_paths.employees,
     exact: true,
     component: EmployeesPage,
   },
   {
-    path: '/employees/:id',
+    path: route_paths.employee.match,
     exact: true,
     component: SingleEmployeePage,
   },
   {
-    path: '/settings',
+    path: route_paths.settings,
     exact: true,
     component: SettingsPage,
   },

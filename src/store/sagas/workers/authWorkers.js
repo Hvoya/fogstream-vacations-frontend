@@ -9,6 +9,7 @@ import { removeAccessToken, setAccessToken } from '@/utils/LS';
 import { getAuthHeaderString } from '@/utils/helpers';
 import messages from '@/enums/messages';
 import history from '@/utils/history';
+import route_paths from '@/enums/route_paths';
 
 export function* loginWorker(action) {
   try {
@@ -51,7 +52,7 @@ export function* changePasswordWorker(action) {
     });
     message.success(messages.password_changed);
     setLoading(false);
-    history.push('/');
+    history.push(route_paths.root);
   } catch (e) {
     const { setLoading } = action;
     handleRequestError(e);

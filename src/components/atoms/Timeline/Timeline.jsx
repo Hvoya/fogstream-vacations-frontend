@@ -5,6 +5,8 @@ import moment from 'moment';
 
 import './overrides.less';
 import './Timeline.less';
+import TimelineItemRenderer from 'atoms/TimelineItemRenderer/TimelineItemRenderer';
+import TimelineGroupRenderer from 'atoms/TimelineGroupRenderer/TimelineGroupRenderer';
 
 const timeSteps = {
   year: 1,
@@ -13,12 +15,36 @@ const timeSteps = {
   hours: 0,
 };
 
+const minTime = moment()
+  .subtract(1, 'year')
+  .startOf('year')
+  .valueOf();
+const maxTime = moment()
+  .add(1, 'year')
+  .endOf('year')
+  .valueOf();
+
+function limitScrollBehavior(visibleTimeStart, visibleTimeEnd, updateScrollCanvas) {
+  if (visibleTimeStart < minTime && visibleTimeEnd > maxTime) {
+    updateScrollCanvas(minTime, maxTime);
+  } else if (visibleTimeStart < minTime) {
+    updateScrollCanvas(minTime, minTime + (visibleTimeEnd - visibleTimeStart));
+  } else if (visibleTimeEnd > maxTime) {
+    updateScrollCanvas(maxTime - (visibleTimeEnd - visibleTimeStart), maxTime);
+  } else {
+    updateScrollCanvas(visibleTimeStart, visibleTimeEnd);
+  }
+}
+
 const Timeline = ({ groups, items, onColumnCheck }) => {
   return (
     <ReactCalendarTimeline
+      itemRenderer={TimelineItemRenderer}
+      groupRenderer={TimelineGroupRenderer}
       timeSteps={timeSteps}
       groups={groups}
       items={items}
+      onTimeChange={limitScrollBehavior}
       defaultTimeStart={moment('2020-01-01')}
       defaultTimeEnd={moment('2020-12-31')}
       lineHeight={45}

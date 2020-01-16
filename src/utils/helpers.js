@@ -28,13 +28,14 @@ export function getGroupsAndItems(vacations = []) {
     if (!isSuchGroupExist) groups.push({ id: employee.id, title: employeeShortName });
 
     items.push({
+      name: getFullUserName(employee),
       id: vacation.id,
       group: employee.id,
       canMove: false,
       canResize: false,
       canChangeGroup: false,
       start_time: moment(date_start),
-      end_time: moment(date_end),
+      end_time: moment(date_end).add(1, 'day'),
     });
   });
 
@@ -78,4 +79,22 @@ export function colorColumns(busyDays, time_start) {
   if (busyDays[currentTimeStart] >= 5) return ['red-2'];
   if (busyDays[currentTimeStart] >= 3) return ['red-1'];
   return [];
+}
+
+export function getPlural(number, labelsArray) {
+  // (2, [день, дня, дней])
+  number = parseInt(number);
+  if (number.toString().endsWith('1') && number !== 11) return labelsArray[0];
+  else if (
+    (number.toString().endsWith('2') || number.toString().endsWith('3') || number.toString().endsWith('4')) &&
+    number !== 12 &&
+    number !== 13 &&
+    number !== 14
+  ) {
+    return labelsArray[1];
+  } else return labelsArray[2];
+}
+
+export function getPluralDays(count) {
+  return getPlural(count, ['день', 'дня', 'дней']);
 }

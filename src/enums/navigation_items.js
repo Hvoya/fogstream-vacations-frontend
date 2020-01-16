@@ -1,18 +1,15 @@
+import route_paths from '@/enums/route_paths';
+
 export default [
   {
-    to: '/',
+    to: route_paths.root,
     label: 'Общий график',
     icon: 'bar-chart',
   },
   {
-    to: '/employees',
+    to: route_paths.employees,
     label: 'Сотрудники',
     icon: 'team',
-  },
-  {
-    to: '/carryovers',
-    label: 'Переносы',
-    icon: 'swap',
   },
   {
     to: '/settings',

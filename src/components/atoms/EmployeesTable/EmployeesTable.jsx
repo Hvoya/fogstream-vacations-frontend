@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 
 import classes from './EmployeesTable.module.less';
 import { getFullUserName } from '@/utils/helpers';
+import route_paths from '@/enums/route_paths';
 
 const columns = [
   {
@@ -27,7 +28,7 @@ const EmployeesTable = ({ employees }) => {
   const history = useHistory();
 
   const onRowClick = useCallback(row => ({
-    onClick: () => history.push(`/employees/${row.id}`),
+    onClick: () => history.push(route_paths.employee.construct(row.id)),
   }));
 
   return (
