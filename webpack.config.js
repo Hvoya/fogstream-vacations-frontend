@@ -8,6 +8,20 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const targetDir = path.resolve(__dirname, 'dist');
+const isAnalyzeMode = process.env.ANALYZER;
+
+const plugins = [
+  new MiniCssExtractPlugin({
+    filename: '[name].css',
+    chunkFilename: '[id].css',
+    ignoreOrder: false,
+  }),
+  new HtmlWebpackPlugin({
+    template: 'src/index.html',
+    filename: './index.html',
+  }),
+];
+if (isAnalyzeMode) plugins.push(new BundleAnalyzerPlugin());
 
 module.exports = {
   entry: {
@@ -176,18 +190,7 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
     },
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-      ignoreOrder: false,
-    }),
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      filename: './index.html',
-    }),
-    new BundleAnalyzerPlugin(),
-  ],
+  plugins,
   optimization: {
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },
