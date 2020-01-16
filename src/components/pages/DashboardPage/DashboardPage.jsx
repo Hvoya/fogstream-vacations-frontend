@@ -22,7 +22,8 @@ const DashboardPage = () => {
 
   return (
     <WorkplacePageTemplate loading={loading} title="Общий график">
-      <Timeline onColumnCheck={handleColumnCheck} groups={groups} items={items} />
+      {/* Change data props cause bugs  */}
+      {!loading && <Timeline onColumnCheck={handleColumnCheck} groups={groups} items={items} />}
     </WorkplacePageTemplate>
   );
 };

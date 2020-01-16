@@ -12,6 +12,10 @@ export function getShortUserName({ first_name = '', last_name = '', middle_name 
   return result;
 }
 
+export function getFullUserName({ first_name = '', last_name = '', middle_name }) {
+  return last_name + (first_name ? ` ${first_name}` : '') + (middle_name ? ` ${middle_name}` : '');
+}
+
 export function getGroupsAndItems(vacations = []) {
   const groups = [];
   const items = [];
@@ -35,6 +39,21 @@ export function getGroupsAndItems(vacations = []) {
   });
 
   return [groups, items];
+}
+
+export function getItems(vacations = [], group_id) {
+  return vacations.map(vacation => {
+    const { date_start, date_end } = vacation;
+    return {
+      id: vacation.id,
+      group: group_id,
+      canMove: false,
+      canResize: false,
+      canChangeGroup: false,
+      start_time: moment(date_start),
+      end_time: moment(date_end),
+    };
+  });
 }
 
 export function getBusyDays(vacations = []) {

@@ -3,13 +3,14 @@ import { Table } from 'antd';
 import { useHistory } from 'react-router';
 
 import classes from './EmployeesTable.module.less';
-import { getShortUserName } from '@/utils/helpers';
+import { getFullUserName } from '@/utils/helpers';
 
 const columns = [
   {
     title: 'Имя',
-    render: employee => getShortUserName(employee),
+    render: employee => getFullUserName(employee),
     key: 'name',
+    width: '50%',
   },
   {
     title: 'Должность',
@@ -18,6 +19,7 @@ const columns = [
       return position.name;
     },
     key: 'position',
+    width: '50%',
   },
 ];
 

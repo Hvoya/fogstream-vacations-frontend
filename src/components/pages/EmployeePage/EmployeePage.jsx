@@ -6,7 +6,7 @@ import WorkplacePageTemplate from 'templates/WorkplacePageTemplate/WorkplacePage
 import Timeline from 'atoms/Timeline/Timeline';
 import PositionBlock from 'atoms/PositionBlock/PositionBlock';
 import { createGetEmployeeRequestAction } from '@/store/actions/employeesActionCreators';
-import { getShortUserName } from '@/utils/helpers';
+import { getFullUserName, getItems } from '@/utils/helpers';
 import classes from './EmployeePage.module.less';
 
 const EmployeePage = () => {
@@ -14,8 +14,10 @@ const EmployeePage = () => {
   const { id: employee_id } = useParams();
 
   const employee = useSelector(state => state.employees.employee);
+  const loading = useSelector(state => state.employees.employeeLoading);
+  const position = employee.position || {};
 
-  const employeeName = useMemo(() => getShortUserName(employee), [employee]);
+  const employeeName = useMemo(() => getFullUserName(employee), [employee]);
   const groups = useMemo(
     () => [
       {
@@ -26,15 +28,17 @@ const EmployeePage = () => {
     [employee],
   );
 
+  const items = useMemo(() => getItems(employee.vacation_set, employee.id));
+
   useEffect(() => {
     dispatch(createGetEmployeeRequestAction(employee_id));
   }, []);
 
   return (
-    <WorkplacePageTemplate title={`Сотрудник: ${employeeName}`}>
-      <PositionBlock className={classes.position} positionName={employee.position.name} />
+    <WorkplacePageTemplate loading={loading} title={`Сотрудник: ${employeeName}`}>
+      <PositionBlock className={classes.position} position={position} />
       <div className={classes.vacationsLabel}>Отпуски</div>
-      <Timeline groups={groups} items={[]} />
+      <Timeline groups={groups} items={items} />
     </WorkplacePageTemplate>
   );
 };

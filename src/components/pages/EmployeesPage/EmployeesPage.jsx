@@ -14,10 +14,11 @@ const EmployeesPage = () => {
 
   const selectedDepartmentId = useSelector(state => state.filters.selectedDepartmentId);
   const selectedPositionId = useSelector(state => state.filters.selectedPositionId);
+  const searchString = useSelector(state => state.filters.employeesSearchString);
 
   useEffect(() => {
-    dispatch(createGetEmployeesListRequestAction(selectedDepartmentId, selectedPositionId));
-  }, [selectedDepartmentId, selectedPositionId]);
+    dispatch(createGetEmployeesListRequestAction(selectedDepartmentId, selectedPositionId, searchString));
+  }, [selectedDepartmentId, selectedPositionId, searchString]);
 
   return (
     <WorkplacePageTemplate loading={loading} title="Сотрудники">

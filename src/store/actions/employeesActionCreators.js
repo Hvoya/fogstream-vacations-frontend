@@ -1,10 +1,11 @@
 import actionTypes from '@/store/actions/actionTypes';
 
-export const createGetEmployeesListRequestAction = (selected_department_id, selected_position_id) => ({
+export const createGetEmployeesListRequestAction = (selected_department_id, selected_position_id, search_string) => ({
   type: actionTypes.GET_EMPLOYEES_LIST_REQUEST,
   payload: {
     selected_department_id,
     selected_position_id,
+    search_string,
   },
 });
 export const createGetEmployeesListSuccessAction = employees => ({

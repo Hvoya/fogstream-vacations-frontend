@@ -29,3 +29,10 @@ export const createSelectPositionAction = position_id => ({
   type: actionTypes.SELECT_POSITION,
   payload: { position_id },
 });
+
+export const createChangeEmployeesSearchStringAction = search_string => ({
+  type: actionTypes.CHANGE_EMPLOYEES_SEARCH_STRING,
+  payload: { search_string },
+});
+
+export const createResetEmployeesFiltersAction = () => ({ type: actionTypes.RESET_EMPLOYEES_FILTERS });

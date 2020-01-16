@@ -8,6 +8,7 @@ const initialState = {
 
   selectedDepartmentId: undefined,
   selectedPositionId: undefined,
+  employeesSearchString: '',
 };
 
 export function filtersReducer(state = initialState, action) {
@@ -30,6 +31,10 @@ export function filtersReducer(state = initialState, action) {
       return { ...state, selectedDepartmentId: action.payload.department_id };
     case actionTypes.SELECT_POSITION:
       return { ...state, selectedPositionId: action.payload.position_id };
+    case actionTypes.CHANGE_EMPLOYEES_SEARCH_STRING:
+      return { ...state, employeesSearchString: action.payload.search_string };
+    case actionTypes.RESET_EMPLOYEES_FILTERS:
+      return { ...state, selectedDepartmentId: undefined, selectedPositionId: undefined, employeesSearchString: '' };
 
     default:
       return state;

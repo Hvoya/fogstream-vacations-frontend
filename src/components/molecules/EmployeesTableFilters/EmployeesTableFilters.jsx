@@ -1,17 +1,21 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
-import { Select as AntSelect } from 'antd';
+import { Select as AntSelect, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Select from 'atoms/Select/Select';
+import Button from 'atoms/Button/Button';
 import {
   createGetDepartmentOptionsRequestAction,
   createGetPositionOptionsRequestAction,
   createSelectDepartmentAction,
   createSelectPositionAction,
+  createChangeEmployeesSearchStringAction,
+  createResetEmployeesFiltersAction,
 } from '@/store/actions/filtersActionCreators';
 import classes from './EmployeesTableFilters.module.less';
 
 const { Option } = AntSelect;
+const { Search } = Input;
 
 const EmployeesTableFilters = () => {
   const dispatch = useDispatch();
@@ -25,6 +29,7 @@ const EmployeesTableFilters = () => {
 
   const selectedDepartmentId = useSelector(state => state.filters.selectedDepartmentId);
   const selectedPositionId = useSelector(state => state.filters.selectedPositionId);
+  const searchString = useSelector(state => state.filters.employeesSearchString);
 
   // Memoize
   const departmentOptionNodes = useMemo(() => {
@@ -53,6 +58,10 @@ const EmployeesTableFilters = () => {
     dispatch(createSelectPositionAction(value));
   }, []);
 
+  const handleSearch = useCallback(value => dispatch(createChangeEmployeesSearchStringAction(value)), []);
+
+  const handleResetFilters = useCallback(() => dispatch(createResetEmployeesFiltersAction()), []);
+
   // Effects
   useEffect(() => {
     dispatch(createGetDepartmentOptionsRequestAction());
@@ -60,6 +69,13 @@ const EmployeesTableFilters = () => {
 
   return (
     <div className={classes.root}>
+      <Search
+        onSearch={handleSearch}
+        defaultValue={searchString}
+        enterButton
+        placeholder="Поиск"
+        className={classes.input}
+      />
       <Select
         allowClear
         disabled={departmentOptionsLoading}
@@ -80,6 +96,9 @@ const EmployeesTableFilters = () => {
       >
         {positionOptionNodes}
       </Select>
+      <Button onClick={handleResetFilters} type="primary">
+        Сбросить фильтры
+      </Button>
     </div>
   );
 };

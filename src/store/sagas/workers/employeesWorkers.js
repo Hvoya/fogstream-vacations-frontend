@@ -13,12 +13,13 @@ import {
 export function* employeesWorker(action) {
   try {
     const {
-      payload: { selected_department_id, selected_position_id },
+      payload: { selected_department_id, selected_position_id, search_string },
     } = action;
     const { data: employees } = yield call(axs.get, api_urls.employees, {
       params: {
-        department: selected_department_id,
+        position__department: selected_department_id,
         position: selected_position_id,
+        search: search_string,
       },
     });
     yield put(createGetEmployeesListSuccessAction(employees));
