@@ -62,6 +62,7 @@
   "dependencies": {
     "antd": "^3.26.4",
     "axios": "^0.19.1",
+    "express": "^4.17.1",
     "history": "^4.10.1",
     "interactjs": "^1.7.3",
     "moment": "^2.24.0",
