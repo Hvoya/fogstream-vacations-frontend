@@ -31,7 +31,7 @@ export function* loginWorker(action) {
 export function* logoutWorker() {
   try {
     removeAccessToken();
-    axs.defaults.headers.common.remove('Authorization');
+    delete axs.defaults.headers.common['Authorization'];
     yield call(axs.post, api_urls.logout);
   } catch (e) {
     handleRequestError(e);
