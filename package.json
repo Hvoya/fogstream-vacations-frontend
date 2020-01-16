@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "build": "webpack --mode production",
     "dev": "webpack-dev-server  --open --mode development",
     "pretty": "prettier --write src/**/*.js & prettier --write src/**/*.jsx",
