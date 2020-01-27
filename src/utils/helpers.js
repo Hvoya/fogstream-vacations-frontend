@@ -81,6 +81,35 @@ export function colorColumns(busyDays, time_start) {
   return [];
 }
 
+export function getVacationHistoryRows(vacations) {
+  const raws = [];
+  vacations.forEach(vacation => {
+    const history_set = vacation.history_vacations;
+    history_set.reverse();
+    history_set.forEach(history_node => {
+      const to = { start: '', end: '' };
+      if (history_node.next) {
+        const next_node = history_set.find(node => history_node.next === node.id);
+        to.start = next_node.date_start;
+        to.end = next_node.date_end;
+      } else {
+        to.start = vacation.date_start;
+        to.end = vacation.date_end;
+      }
+
+      raws.push({
+        from: {
+          start: history_node.date_start,
+          end: history_node.date_end,
+        },
+        to,
+      });
+    });
+  });
+
+  return raws;
+}
+
 export function getPlural(number, labelsArray) {
   // (2, [день, дня, дней])
   number = parseInt(number);

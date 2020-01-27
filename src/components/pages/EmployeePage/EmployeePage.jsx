@@ -8,6 +8,7 @@ import PositionBlock from 'atoms/PositionBlock/PositionBlock';
 import { createGetEmployeeRequestAction } from '@/store/actions/employeesActionCreators';
 import { getFullUserName, getItems } from '@/utils/helpers';
 import classes from './EmployeePage.module.less';
+import VacationsHistoryTable from 'atoms/VacationsHistoryTable/VacationsHistoryTable';
 
 const EmployeePage = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,8 @@ const EmployeePage = () => {
       <PositionBlock className={classes.position} position={position} />
       <div className={classes.vacationsLabel}>Отпуски</div>
       <Timeline groups={groups} items={items} />
+      <h2 className={classes.historyHeading}>Переносы:</h2>
+      <VacationsHistoryTable vacations={employee.vacation_set} />
     </WorkplacePageTemplate>
   );
 };
