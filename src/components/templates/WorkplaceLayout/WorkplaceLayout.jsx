@@ -6,6 +6,7 @@ import Content from 'organisms/Content/Content';
 import Header from 'organisms/Header/Header';
 import Sider from 'organisms/Sider/Sider';
 import { workplaceRoutes } from '@/routes';
+import classes from './WorkplaceLayout.module.less';
 
 const WorkplaceLayout = () => {
   const routes = useMemo(() => {
@@ -15,7 +16,7 @@ const WorkplaceLayout = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout className={classes.layout}>
       <Sider />
       <Layout>
         <Header />
